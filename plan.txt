@@ -1,0 +1,29 @@
+- Must use recursion
+
+Pyramid
+    - each person in row splits the weight of the person above them
+
+    - "Distributed weight" = person's weight + weight they are supporting above them
+        > Ex: Person A's weight is split between persons B and C
+        > Ex: Person E
+            - directly supporting half of B (100 lbs)
+            - half the weight of person E (100 lbs)
+            - half the weight person b is shouldering (50 lbs)
+            - half the weight person c is shouldering (50 lbs)
+                = supporting 300 lbs
+        > Ex: Person D
+            - Only weight on them comes from person B
+            - Half of person B (100 lbs)
+            - Half the weight person B is holding (50 lbs)
+                = Total 150 lbs
+        > Ex: Person H
+            - half of person D (100 lbs)
+            - half of Person E (100 lbs)
+            - half the weight D is holding (75 lbs)
+            - half the weight E is holding (150 lbs)
+                = Total 425 lbs
+
+
+    - Each person weighs 200 lbs
+
+    - 
