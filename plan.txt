@@ -3,7 +3,8 @@
 Pyramid
     - each person in row splits the weight of the person above them
 
-    - "Distributed weight" = person's weight + weight they are supporting above them
+    - "Distributed weight" = person's weight + weight they are 
+		supporting above them
         > Ex: Person A's weight is split between persons B and C
         > Ex: Person E
             - directly supporting half of B (100 lbs)
@@ -27,3 +28,136 @@ Pyramid
     - Each person weighs 200 lbs
 
     - 
+
+
+Pyramid
+	- Each person weighs 200lbs
+	- Outside person on each row calculates weight differently 
+		than interior
+	- Weight on any person can be calculated recursively
+	- Base case is person at top of the pyramid (0lbs shoulder)
+
+--------------------------------------------------------------------
+				Part 1
+--------------------------------------------------------------------
+	- Recursive function weight_on(r, c)
+		> returns the weight carried by the 
+			person in row r and column c
+
+		> Rows an columns are 0-based in 
+			row-major order
+			- Top = (0,0)
+			- Person H = (3, 1)
+
+		> Ex: Person A & Person H
+			weight_on(0,0) == 0.00
+			weight_on(3,1) == 425.00
+
+		> weight should be floating points
+
+--------------------------------------------------------------------
+				Part 2
+--------------------------------------------------------------------
+	- Write main conditional execution 
+		> code can run as a standalone app with command line 
+			parameters
+
+		> Accept num or rows via argparse
+
+		> Print each row one line at a time as weight_on
+			computes them
+		
+		> Formulate values to 2 decimal places with f strings
+
+	- def weight_on must be recursive, no loops
+	
+	- name file pyramid.py
+
+	- time.perf_counter to calculate elapsed time for main func
+
+	- save output to part2.out
+
+	- count function calls
+		> increment counter every time weight_on is called
+
+	- Numbers must match those shows in Ex
+
+	- main() can use loops
+
+	- Ex: 
+$ python3 pyramid.py 7
+
+0.00 
+100.00 100.00 
+150.00 300.00 150.00 
+175.00 425.00 425.00 175.00 
+187.50 500.00 625.00 500.00 187.50 
+193.75 543.75 762.50 762.50 543.75 193.75 
+196.88 568.75 853.12 962.50 853.12 568.75 196.88 
+
+Elapsed time: 0.0002778119999999988 seconds
+Number of function calls: 466
+
+--------------------------------------------------------------------
+				Part 3
+--------------------------------------------------------------------
+	- Avoid computing weight_on for the same row and col more 
+		than once
+		> save results for any pos in a module level 
+			dictionary called "cache"
+		> key for dictionary is the tuple (r,c)
+		> the value is the previously computed weight for that
+			pos (r,c)
+
+	- First thing weight_on should do is check
+		to see if there is an entry for key (r, c) in cache
+			> if yes, return
+			> if no, compute weight and save in cache
+
+	- Print out the total number of cache hits
+		> When you get a result saved in the cache rather than 
+			recomputing
+		> only increment counter when you do this
+
+	- Name file: pyramid_c.py
+	- name output part 3.out
+	- include cache hits
+
+--------------------------------------------------------------------
+				Part 4
+--------------------------------------------------------------------
+- Design a working OOP solution
+	
+- Person class
+	- attr row: int
+	- attr col: int
+	- attr weight: float
+	- attr shoulder: float
+
+- constructor
+	> takes row, column, weight as input
+	> Initialize should attr to none
+	
+- method weight_on: float
+	> if self.shoulder has val return
+	> else recursively compute, store in self.shoulder and return
+	> no params, each Person knows it's own location on pyramid
+	> use dictionary (location, Person) pairs to retrieve other 
+		Person objects
+
+
+
+
+
+
+--------------------------------------------------------------------
+				VIDEO LECTURE
+--------------------------------------------------------------------
+
+
+
+
+
+
+
+
