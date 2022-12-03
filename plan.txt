@@ -154,8 +154,18 @@ Number of function calls: 466
 				VIDEO LECTURE
 --------------------------------------------------------------------
 
+Pattern
+	- left side, right side
+		> left side (r, 0), right side (r, c) r = c
+		0, 100, 150, 175
+		> recursively call the weight on top of them
 
-
+	- middle
+		> r != 0, r != c
+		> recursively call two weights on top of them
+			- Left side (r - 1, c -1)
+			- Right side (r -1, c)
+		> 
 
 
 
