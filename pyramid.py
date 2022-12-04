@@ -43,10 +43,10 @@ def main():
         f.write("\r")
     
     # print(f'\nFunction Calls: {function_calls}')
-    f.write(f'\nFunction Calls: {function_calls}')
     time_stop = perf_counter()
     time_elapsed = time_stop - time_start
     f.write(f'\nTime Elapsed: {time_elapsed} seconds')
+    f.write(f'\nFunction Calls: {function_calls}')
 
     # arg_parser.add_argument(rows, type=input, default=0)
 
