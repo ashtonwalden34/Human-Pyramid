@@ -1,5 +1,6 @@
 import sys
 import argparse
+from time import perf_counter
 
 arg_parser = argparse.ArgumentParser()
 
@@ -30,6 +31,7 @@ def weight_on(row, col):
 
 
 def main():
+    time_start = perf_counter()
     rows = int(input("Enter a the number of rows: "))
     f = open('part2.out', 'w')
     for row in range(0, rows):
@@ -41,7 +43,10 @@ def main():
         f.write("\r")
     
     # print(f'\nFunction Calls: {function_calls}')
-    f.write(f'\nFunction Calls: {function_calls}')    
+    f.write(f'\nFunction Calls: {function_calls}')
+    time_stop = perf_counter()
+    time_elapsed = time_stop - time_start
+    f.write(f'\nTime Elapsed: {time_elapsed} seconds')
 
     # arg_parser.add_argument(rows, type=input, default=0)
 
@@ -50,5 +55,3 @@ if __name__ == "__main__":
 
 
 #  argeparse input
-# save output to part2.out
-# use time.perf_counter to calc elapsed time fo main function
