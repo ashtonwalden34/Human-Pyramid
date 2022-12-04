@@ -1,5 +1,7 @@
-# input will be num of rows
-rows = int(input("Enter a the number of rows: "))
+import sys
+import argparse
+
+arg_parser = argparse.ArgumentParser()
 
 func_calls = 0
 elapsed_time = 0
@@ -25,9 +27,17 @@ def weight_on(row, col):
         return(result)
 
 
-for row in range(0, rows):
-    # print(f'row: {row}')
-    for col in range (0, row + 1):
-        # print(f'row: {int(row)} col: {int(col)}', end=" ")
-        print(weight_on(int(row), int(col)), end=" ")
-    print("\r")
+def main():
+    rows = int(input("Enter a the number of rows: "))
+
+    for row in range(0, rows):
+     # print(f'row: {row}')
+        for col in range (0, row + 1):
+            # print(f'row: {int(row)} col: {int(col)}', end=" ")
+            print(weight_on(int(row), int(col)), end=" ")
+        print("\r")
+
+    # arg_parser.add_argument(rows, type=input, default=0)
+
+if __name__ == "__main__":
+    main()
