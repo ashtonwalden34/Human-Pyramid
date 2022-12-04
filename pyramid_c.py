@@ -6,34 +6,53 @@ arg_parser = argparse.ArgumentParser()
 
 function_calls = 0
 elapsed_time = 0
+cache_hits = 0
 weights = {}
 
 def weight_on(row, col):
     global function_calls
+    global cache_hits
     function_calls += 1
+
+    # base case
     if row == 0:
-        result = 0
-        weights[row, col] = result
-        return(result)
+        if (row, col) in weights.keys():
+            cache_hits += 1
+            return(weights.get(row, col))
+        else:
+            result = 0
+            weights[row, col] = result
+            return(result)
+
     # outer left
     elif col == 0:
-        # result = 200 + (weight_on(row - 1, 0) / 2)
-        result = (200 + weight_on(row - 1, 0)) / 2
-        weights[row, col] = result
-        return(result)
+        if (row, col) in weights.keys():
+            cache_hits += 1
+            return(weights.get(row, col))
+        else:
+            result = (200 + weight_on(row - 1, 0)) / 2
+            weights[row, col] = result
+            return(result)
+
     # outer right
     elif col == row:
-        # result = 200 + (weight_on(row - 1, row) / 2)
-        result = (200 + weight_on(row - 1, 0)) / 2
-        weights[row, col] = result
-        return(result)
+        if (row, col) in weights.keys():
+            cache_hits += 1
+            return(weights.get(row, col))
+        else:
+            result = (200 + weight_on(row - 1, 0)) / 2
+            weights[row, col] = result
+            return(result)
+
     # middle columns
     else:
-        result = 200 + ((weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2)
-        weights[row, col] = result
-        # result = (200 + weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2
-        return(result)
-
+        if (row, col) in weights.keys():
+            cache_hits += 1
+            return(weights.get(row, col))
+        else:
+            result = 200 + ((weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2)
+            weights[row, col] = result
+            return(result)
 
 def main():
     time_start = perf_counter()
