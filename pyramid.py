@@ -3,10 +3,12 @@ import argparse
 
 arg_parser = argparse.ArgumentParser()
 
-func_calls = 0
+function_calls = 0
 elapsed_time = 0
 
 def weight_on(row, col):
+    global function_calls
+    function_calls += 1
     if row == 0:
         result = 0
         return(result)
@@ -29,15 +31,24 @@ def weight_on(row, col):
 
 def main():
     rows = int(input("Enter a the number of rows: "))
-
+    f = open('part2.out', 'w')
     for row in range(0, rows):
-     # print(f'row: {row}')
         for col in range (0, row + 1):
-            # print(f'row: {int(row)} col: {int(col)}', end=" ")
-            print(f'{weight_on(int(row), int(col)):.2f}', end=" ")
-        print("\r")
+            f.write(f'{weight_on(int(row), int(col)):.2f}')
+            f.write(" ")
+            # print(f'{weight_on(int(row), int(col)):.2f}', end=" ")
+        # print("\r")
+        f.write("\r")
+    
+    # print(f'\nFunction Calls: {function_calls}')
+    f.write(f'\nFunction Calls: {function_calls}')    
 
     # arg_parser.add_argument(rows, type=input, default=0)
 
 if __name__ == "__main__":
     main()
+
+
+#  argeparse input
+# save output to part2.out
+# use time.perf_counter to calc elapsed time fo main function
