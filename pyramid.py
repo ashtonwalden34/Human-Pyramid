@@ -34,7 +34,7 @@ def main():
      # print(f'row: {row}')
         for col in range (0, row + 1):
             # print(f'row: {int(row)} col: {int(col)}', end=" ")
-            print(weight_on(int(row), int(col)), end=" ")
+            print(f'{weight_on(int(row), int(col)):.2f}', end=" ")
         print("\r")
 
     # arg_parser.add_argument(rows, type=input, default=0)

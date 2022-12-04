@@ -62,7 +62,7 @@ Pyramid
 		> code can run as a standalone app with command line 
 			parameters
 
-		> Accept num or rows via argparse
+		> Accept num of rows via argparse
 
 		> Print each row one line at a time as weight_on
 			computes them
