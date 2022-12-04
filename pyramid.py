@@ -1,35 +1,33 @@
 # input will be num of rows
 rows = int(input("Enter a the number of rows: "))
 
+func_calls = 0
+elapsed_time = 0
+
 def weight_on(row, col):
-    col = int(col)
-    row = int(row)
     if row == 0:
         result = 0
+        return(result)
     # outer left
     elif col == 0:
-        #  what the video showed
-        # result = (200 + weight_on(row - 1, 0)) / 2
-        #  what I think may be correct
-        result = 200 + (weight_on(row - 1, 0) / 2)
+        # result = 200 + (weight_on(row - 1, 0) / 2)
+        result = (200 + weight_on(row - 1, 0)) / 2
+        return(result)
     # outer right
     elif col == row:
-         #  what the video showed
-        # result = (200 + weight_on(row - 1, row)) / 2
-        #  what I think may be correct
-        result = 200 + (weight_on(row - 1, row) / 2)
+        # result = 200 + (weight_on(row - 1, row) / 2)
+        result = (200 + weight_on(row - 1, 0)) / 2
+        return(result)
     # middle columns
     else:
-         #  what the video showed
-        # result = (200 + (weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2)
-        #  what I think may be correct
-        result = 200 + (weight_on(row - 1, col -1) + weight_on(row - 1, col) / 2)
-        pass
+        result = 200 + ((weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2)
+        # result = (200 + weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2
+        return(result)
 
 
-for row in range(rows):
-    # num of cols = num of row + 1
-    for col in range(rows + 1):
-        print(weight_on(row, col))
-    # print new line
-    print()
+for row in range(0, rows):
+    # print(f'row: {row}')
+    for col in range (0, row + 1):
+        # print(f'row: {int(row)} col: {int(col)}', end=" ")
+        print(weight_on(int(row), int(col)), end=" ")
+    print("\r")
