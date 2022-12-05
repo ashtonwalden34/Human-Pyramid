@@ -2,8 +2,6 @@ import sys
 import argparse
 from time import perf_counter
 
-arg_parser = argparse.ArgumentParser()
-
 function_calls = 0
 elapsed_time = 0
 
@@ -32,7 +30,11 @@ def weight_on(row, col):
 
 def main():
     time_start = perf_counter()
-    rows = int(input("Enter a the number of rows: "))
+    parser = argparse.ArgumentParser()
+    parser.add_argument('rows', type=int, help='enter a number of rows')
+    args = parser.parse_args()
+    rows = args.rows
+    # rows = int(input("Enter a the number of rows: "))
     f = open('part2.out', 'w')
     for row in range(0, rows):
         for col in range (0, row + 1):
@@ -51,6 +53,10 @@ def main():
     # arg_parser.add_argument(rows, type=input, default=0)
 
 if __name__ == "__main__":
+    arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument('rows', type = int)
+    args = arg_parser.parse_args()
+    print("Enter a the number of rows: ", args.rows)
     main()
 
 

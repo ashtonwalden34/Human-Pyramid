@@ -51,6 +51,7 @@ def weight_on(row, col):
             return(weights.get(row, col))
         else:
             result = 200 + ((weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2)
+            # result = (200 + weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2
             weights[row, col] = result
             return(result)
 
