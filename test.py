@@ -18,15 +18,16 @@ class Person():
 
     def weight_on(self):
         global cache_hits
-        # print(weights)
         if (self.row, self.col) in weights:
             return(self.shoulder)
         else: 
             if self.row == 0:
                 if (self.row, self.col) in weights:
+                    print("hit if line 27")
                     cache_hits += 1
                     return(weights.get(self.shoulder))
                 else:
+                    print("hit else line 31")
                     self.shoulder = 0
                     weights[self.row, self.col] = Person(self.row, self.col, self.weight, self.shoulder)
                     return(self.shoulder)
@@ -42,23 +43,23 @@ class Person():
                     return(result)
 
             # outer right
-            elif self.col == self.row:
-                if (self.row, self.col) in weights.keys():
+            elif Person.col == Person.row:
+                if (Person.row, Person.col) in weights.keys():
                     cache_hits += 1
-                    return(weights.get(self.row, self.col))
+                    return(weights.get(Person.row, Person.col))
                 else:
-                    result = (200 + self.weight_on(self.row - 1, 0)) / 2
-                    weights[self.row, self.col] = Person(self.row, self.col, self.weight, self.shoulder)
+                    result = (200 + Person.weight_on(Person.row - 1, 0)) / 2
+                    weights[Person.row, Person.col] = Person(Person.row, Person.col, Person.weight, Person.shoulder)
                     return(result)
 
             # middle columns
             else:
-                if (self.row, self.col) in weights.keys():
+                if (Person.row, Person.col) in weights.keys():
                     cache_hits += 1
-                    return(weights.get(self.row, self.col))
+                    return(weights.get(Person.row, Person.col))
                 else:
-                    result = 200 + ((self.weight_on(self.row - 1, self.col -1) + self.weight_on(self.row - 1, self.col)) / 2)
-                    weights[self.row, self.col] = Person(self.row, self.col, self.weight, self.shoulder)
+                    result = 200 + ((Person.weight_on(Person.row - 1, Person.col -1) + Person.weight_on(Person.row - 1, Person.col)) / 2)
+                    weights[Person.row, Person.col] = Person(Person.row, Person.col, Person.weight, Person.shoulder)
                     return(result)
 
     # method weight_on
@@ -76,8 +77,7 @@ def main():
     f = open('part4.out', 'w')
     for row in range(0, rows):
         for col in range (0, row + 1):
-            # f.write(f'{Person.weight_on()}')
-            f.write(f'{Person.weight_on(self)}')
+            f.write(f'{Person(row, col).weight_on()}')
             f.write(" ")
         # print("\r")
         f.write("\r")

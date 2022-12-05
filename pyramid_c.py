@@ -2,8 +2,6 @@ import sys
 import argparse
 from time import perf_counter
 
-arg_parser = argparse.ArgumentParser()
-
 function_calls = 0
 elapsed_time = 0
 cache_hits = 0
@@ -16,9 +14,9 @@ def weight_on(row, col):
 
     # base case
     if row == 0:
-        if (row, col) in weights.keys():
+        if (row, col) in weights:
             cache_hits += 1
-            return(weights.get(row, col))
+            return(weights[row, col])
         else:
             result = 0
             weights[row, col] = result
@@ -26,9 +24,9 @@ def weight_on(row, col):
 
     # outer left
     elif col == 0:
-        if (row, col) in weights.keys():
+        if (row, col) in weights:
             cache_hits += 1
-            return(weights.get(row, col))
+            return(weights[row, col])
         else:
             result = (200 + weight_on(row - 1, 0)) / 2
             weights[row, col] = result
@@ -36,9 +34,9 @@ def weight_on(row, col):
 
     # outer right
     elif col == row:
-        if (row, col) in weights.keys():
+        if (row, col) in weights:
             cache_hits += 1
-            return(weights.get(row, col))
+            return(weights[row, col])
         else:
             result = (200 + weight_on(row - 1, 0)) / 2
             weights[row, col] = result
@@ -46,18 +44,23 @@ def weight_on(row, col):
 
     # middle columns
     else:
-        if (row, col) in weights.keys():
+        if (row, col) in weights:
             cache_hits += 1
-            return(weights.get(row, col))
+            return(weights[row, col])
         else:
             result = 200 + ((weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2)
+            # result = 200 + ((weights.get(row - 1, col - 1) + (weights.get(row - 1, col) / 2)
             # result = (200 + weight_on(row - 1, col -1) + weight_on(row - 1, col)) / 2
             weights[row, col] = result
             return(result)
 
 def main():
     time_start = perf_counter()
-    rows = int(input("Enter a the number of rows: "))
+    parser = argparse.ArgumentParser()
+    parser.add_argument('rows', type=int, help='enter a number of rows')
+    args = parser.parse_args()
+    rows = args.rows
+    # rows = int(input("Enter a the number of rows: "))
     f = open('part3.out', 'w')
     for row in range(0, rows):
         for col in range (0, row + 1):
@@ -74,7 +77,6 @@ def main():
     f.write(f'\nFunction Calls: {function_calls}')
     f.write(f'\nCache Hits: {cache_hits}')
 
-    # arg_parser.add_argument(rows, type=input, default=0)
 
 if __name__ == "__main__":
     main()
